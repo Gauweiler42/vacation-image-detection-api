@@ -165,4 +165,4 @@ class App (object):
 
         :return: str The path to the temporary folder
         """
-        return self._tmp_folder
+        return self._data_folder

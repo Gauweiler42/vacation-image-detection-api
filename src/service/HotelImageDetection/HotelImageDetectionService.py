@@ -27,8 +27,10 @@ class HotelImageDetectionService(object):
             self._logger.error(f"No class indices were provided. Please provide them in {os.path.join(self._data_folder, 'class_indices.json')}")
             return None
 
-        self._model_path = os.path.exists(os.path.join(self._data_folder, 'model.pt'))
+        self._model_path = os.path.join(self._data_folder, 'model.pt')
         self._class_indices_path = os.path.join(self._data_folder, 'class_indices.json')
+
+        self._load_model()
         self._logger.info(f"Initialized {HotelImageDetectionService.__name__}")
 
     def _load_model(self):
@@ -50,7 +52,7 @@ class HotelImageDetectionService(object):
         num_ftrs = self._model.fc.in_features
         self._model.fc = torch.nn.Linear(num_ftrs, num_classes)
 
-        self._model.load_state_dict(torch.load(self._model_path))
+        self._model.load_state_dict(torch.load(self._model_path, map_location=torch.device('cpu'), weights_only=False))
         self._model.eval()
 
         end_time = time.time()

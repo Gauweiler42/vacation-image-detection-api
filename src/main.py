@@ -13,7 +13,10 @@ controller = [
     RootReadController,
 ]
 
-services = []
+services = [
+    FileManagementService,
+    HotelImageDetectionService,
+]
 
 repositories = []
 
