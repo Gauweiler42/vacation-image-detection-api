@@ -74,7 +74,7 @@ class HotelImageDetectionService(object):
     
     def make_prediction(self, image_path):
         self._logger.info(f"Transforming image for detection...")
-        transformed_image, transform_time = HotelImageDetectionService._transform_image(image_path)
+        transformed_image, transform_time = HotelImageDetectionService.transform_image(image_path)
         self._logger.info(f"Transforming image took {transform_time} ms.")
         return self._predict(transformed_image)
 

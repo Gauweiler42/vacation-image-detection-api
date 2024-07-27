@@ -11,6 +11,7 @@ log_level = os.getenv('LOG_LEVEL', 'INFO').upper()
 
 controller = [
     RootReadController,
+    HotelImageDetectionController,
 ]
 
 services = [
