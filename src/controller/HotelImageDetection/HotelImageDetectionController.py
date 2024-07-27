@@ -31,7 +31,7 @@ class HotelImageDetectionController (object):
 
             return {
                 'predictions': sorted_predictions,
-                'predition_time': prediction_time,
+                'prediction_time': prediction_time,
             }
 
     def get_router(self):
