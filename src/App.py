@@ -4,7 +4,7 @@ import os
 
 
 class App (object):
-    def __init__(self, name, controller, services, repositories, entities, models, loglevel, tmp_folder=None):
+    def __init__(self, name, controller, services, repositories, entities, models, loglevel, tmp_folder=None, data_folder=None):
         """
         Eine Klasse die eine FastAPI App repräsentiert.
 
@@ -16,12 +16,18 @@ class App (object):
         self._name = name
         if tmp_folder is None:
             self._tmp_folder = os.path.join(os.getcwd(), 'tmp')
-
         else:
             self._tmp_folder = tmp_folder
-
         if not os.path.exists(self._tmp_folder):
-            os.makedirs(self._tmp_folder)  
+            os.makedirs(self._tmp_folder)
+
+        if data_folder is None:
+            self._data_folder = os.path.join(os.getcwd(), 'data')
+        else:
+            self._data_folder = data_folder
+        if not os.path.exists(self._data_folder):
+            os.makedirs(self._data_folder)
+
         self._controller = controller
         self._services = services
         self._repositories = repositories
