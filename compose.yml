@@ -4,5 +4,5 @@ services:
   vida:
     build: .
     volumes:
-      - ./data:/data
-      - ./tmp:/tmp
+      - ./data:/app/data
+      - ./tmp:/app/tmp
