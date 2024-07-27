@@ -1,0 +1,13 @@
+.idea
+venv
+.venv
+tmp/
+.env
+
+# PyCache
+*.pyc
+*__pycache__*
+
+*.ifc
+# Models
+*.pth
