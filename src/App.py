@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 import logging
 import os
+from starlette.middleware.cors import CORSMiddleware
 
 
 class App (object):
@@ -35,6 +36,18 @@ class App (object):
         self._models = models
 
         self._app = FastAPI()
+
+        self._app.add_middleware(
+            CORSMiddleware,
+            allow_origins=[
+                "http://localhost:3000",
+                "https://vida.lgauweiler.de"
+            ],
+            allow_credentials=True,
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
+
 
         base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
