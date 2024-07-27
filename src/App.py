@@ -42,7 +42,9 @@ class App (object):
 
         self._logger = logging.getLogger(name)
         self._init_repositories()
-        self._init_services()
+        if not self._init_services():
+            return None
+
         self._init_controller()
 
     def _init_controller(self):
@@ -72,12 +74,18 @@ class App (object):
         """
         Initialisiert alle Services die in der App registriert sind.
 
-        :return: None
+        :return: Returns if all services were created successfully as a boolean
         """
         self._logger.info("Initializing services")
         for i in range(len(self._services)):
-            self._services[i] = self._services[i](self)
-            self._logger.debug("Initialized service: " + str(self._services[i].__class__.__name__))
+            new_service = self._services[i](self)
+            if new_service is not None:
+                self._services[i] = new_service
+                self._logger.debug("Initialized service: " + str(self._services[i].__class__.__name__))
+            else:
+                self._logger.error(f"Error while creating services. App will shut down now...")
+                return False
+        return True
 
     def get_model(self, model_class):
         """
@@ -144,6 +152,14 @@ class App (object):
         return self._app
     
     def get_tmp_folder(self):
+        """
+        Returns the temporary folder path.
+
+        :return: str The path to the temporary folder
+        """
+        return self._tmp_folder
+    
+    def get_data_folder(self):
         """
         Returns the temporary folder path.
 

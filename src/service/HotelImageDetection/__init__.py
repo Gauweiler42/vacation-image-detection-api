@@ -1,0 +1,1 @@
+from .HotelImageDetectionService import *
